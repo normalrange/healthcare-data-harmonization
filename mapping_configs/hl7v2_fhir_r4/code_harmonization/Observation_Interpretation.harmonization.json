@@ -1,0 +1,40 @@
+{
+  "group": [
+    {
+      "element": [
+        {
+          "code" : "A",
+          "display" : "Abnormal",
+          "target" : [
+            {
+              "code" : "A",
+              "display" : "Abnormal",
+              "equivalence" : "equivalent"
+            }
+          ]
+        },
+        {
+          "code" : "AA",
+          "display" : "Critically abnormal",
+          "target" : [
+            {
+              "code" : "AA",
+              "display" : "Critical abnormal",
+              "equivalence" : "equivalent"
+            }
+          ]
+        }
+      ],
+      "source": "HL70078",
+      "target": "http://hl7.org/fhir/ValueSet/observation-interpretation",
+      "unmapped": {
+        "mode": "fixed",
+        "code": "unknown",
+        "display": "Unknown"
+      }
+    }
+  ],
+  "id": "Observation_Interpretation",
+  "resourceType": "ConceptMap",
+  "version": "v1"
+}

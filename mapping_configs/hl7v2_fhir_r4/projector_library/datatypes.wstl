@@ -51,7 +51,7 @@ def Convert_Terminology(required Code, System, ConceptMapID){
 //   Boolean: return true when str is a Number; otherwise false
 //
 def IsNumber(required str) {
-  $this: $MatchesRegex(str, "^\\d*\\.?\\d+$");
+  $this: $MatchesRegex(str, "^\\d*\\.?\\d*$");
 }
 
 // Description: Creates a list of Time Formats to be used by MultiFormatParseTime()
@@ -65,7 +65,7 @@ def IsNumber(required str) {
 //    Array of DateTime Formats that will be used for parsing incoming DateTime fields.
 //
 def GetTimeFormats() {
-  $this: $ListOf("20060102150405-0600", "20060102150405.999999", "20060102150405", "200601021504", "20060102")
+  $this: $ListOf("20060102150405-0700", "20060102150405.999999", "20060102150405", "200601021504", "20060102")
 }
 
 // Description: Returns a Time format for RFC3339 with second or millisecond precision
@@ -78,8 +78,8 @@ def GetTimeFormats() {
 //    Time format for RFC3339 to second or millisecond
 //
 def GetRFC3339(precision) {
-  $this (if precision = "s"): "2006-01-02T15:04:05Z";
-  $this (if precision = "ms"): "2006-01-02T15:04:05.99Z";
+  $this (if precision = "s"): "2006-01-02T15:04:05Z07:00";
+  $this (if precision = "ms"): "2006-01-02T15:04:05.999999999Z07:00";
 }
 
 // Description: Extracts a date in FHIR format from a HL7v2 DateTime datatype

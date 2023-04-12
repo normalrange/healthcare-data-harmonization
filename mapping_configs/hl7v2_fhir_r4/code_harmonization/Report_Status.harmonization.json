@@ -36,6 +36,28 @@
           ]
         },
         {
+          "code": "P",
+          "display": "Partial results",
+          "target": [
+            {
+              "code": "partial",
+              "display": "Partial",
+              "equivalence": "equivalent"
+            }
+          ]
+        },
+        {
+          "code": "I",
+          "display": "Interim results",
+          "target": [
+            {
+              "code": "partial",
+              "display": "Partial",
+              "equivalence": "equivalent"
+            }
+          ]
+        },
+        {
           "code": "F",
           "display": "Final results; results stored and verified.Can only be changed with a corrected result.",
           "target": [
