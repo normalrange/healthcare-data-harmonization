@@ -5,7 +5,7 @@ steps:
   args:
   - '-c'
   - |
-    find ./ -type f -exec sed -i -e 's/\$MAPPING_ENGINE_HOME/gs:\/\/harmonization_dataflow.normalrange.org\/mapping/g' {} \;
+    find ./ -type f -exec sed -i -e 's/\$$MAPPING_ENGINE_HOME/gs:\/\/harmonization_dataflow.normalrange.org\/mapping/g' {} \;
 - name: 'gcr.io/cloud-builders/gsutil'
   entrypoint: 'bash'
   dir: mapping_configs
