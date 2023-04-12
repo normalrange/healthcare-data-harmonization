@@ -1,0 +1,32 @@
+steps:
+- name: 'gcr.io/cloud-builders/gsutil'
+  entrypoint: 'bash'
+  dir: mapping_configs
+  args:
+  - '-c'
+  - |
+    find ./ -type f -exec sed -i -e 's/\$MAPPING_ENGINE_HOME/gs:\/\/harmonization_dataflow.normalrange.org\/mapping/g' {} \;
+- name: 'gcr.io/cloud-builders/gsutil'
+  entrypoint: 'bash'
+  dir: mapping_configs
+  args:
+  - '-c'
+  - |
+    find ./ -type f -exec sed -i -e 's/local_path/gcs_location/g' {} \;
+- name: 'gcr.io/cloud-builders/gsutil'
+  entrypoint: 'bash'
+  dir: mapping_configs
+  args:
+  - '-c'
+  - |
+    gsutil rm -r gs://harmonization-dataflow-8b991c6f190546ce/mapping_configs
+- name: 'gcr.io/cloud-builders/gsutil'
+  entrypoint: 'bash'
+  dir: mapping_configs
+  args:
+  - '-c'
+  - |
+    gsutil cp * gs://harmonization-dataflow-8b991c6f190546ce/mapping_configs
+
+options:
+  logging: CLOUD_LOGGING_ONLY
