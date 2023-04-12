@@ -12,6 +12,13 @@ steps:
   args:
   - '-c'
   - |
+    gsutil cp README.md gs://harmonization-dataflow-8b991c6f190546ce/mapping_configs
+- name: 'gcr.io/cloud-builders/gsutil'
+  entrypoint: 'bash'
+  dir: mapping_configs
+  args:
+  - '-c'
+  - |
     find ./ -type f -exec sed -i -e 's/local_path/gcs_location/g' {} \;
 - name: 'gcr.io/cloud-builders/gsutil'
   entrypoint: 'bash'
