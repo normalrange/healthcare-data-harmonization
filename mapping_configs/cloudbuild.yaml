@@ -33,7 +33,7 @@ steps:
   args:
   - '-c'
   - |
-    gsutil cp * gs://harmonization-dataflow-8b991c6f190546ce/mapping_configs
+    gsutil cp -r * gs://harmonization-dataflow-8b991c6f190546ce/mapping_configs
 
 options:
   logging: CLOUD_LOGGING_ONLY
