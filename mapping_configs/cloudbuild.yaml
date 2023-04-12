@@ -5,14 +5,14 @@ steps:
   args:
   - '-c'
   - |
-    find ./ -type f -exec sed -i -e 's/\$$MAPPING_ENGINE_HOME/gs:\/\/harmonization_dataflow.normalrange.org\/mapping/g' {} \;
+    find ./ -type f -exec sed -i -e 's/\$$MAPPING_ENGINE_HOME/gs:\/\/$_MAPPING_BUCKET\/$_MAPPING_ROOT_FOLDER/g' {} \;
 - name: 'gcr.io/cloud-builders/gsutil'
   entrypoint: 'bash'
   dir: mapping_configs
   args:
   - '-c'
   - |
-    gsutil cp README.md gs://harmonization-dataflow-8b991c6f190546ce/mapping_configs
+    gsutil cp README.md gs://$_MAPPING_BUCKET/$_MAPPING_ROOT_FOLDER/mapping_configs
 - name: 'gcr.io/cloud-builders/gsutil'
   entrypoint: 'bash'
   dir: mapping_configs
@@ -26,14 +26,14 @@ steps:
   args:
   - '-c'
   - |
-    gsutil rm -r gs://harmonization-dataflow-8b991c6f190546ce/mapping_configs
+    gsutil rm -r gs://$_MAPPING_BUCKET/$_MAPPING_ROOT_FOLDER/mapping_configs
 - name: 'gcr.io/cloud-builders/gsutil'
   entrypoint: 'bash'
   dir: mapping_configs
   args:
   - '-c'
   - |
-    gsutil cp -r * gs://harmonization-dataflow-8b991c6f190546ce/mapping_configs
+    gsutil cp -r * gs://$_MAPPING_BUCKET/$_MAPPING_ROOT_FOLDER/mapping_configs
 
 options:
   logging: CLOUD_LOGGING_ONLY
