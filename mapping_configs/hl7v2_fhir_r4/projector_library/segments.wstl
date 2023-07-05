@@ -306,7 +306,7 @@ def OBX_Observation (required OBX, Patient) {
 //   Practitioner: https://www.hl7.org/fhir/practitioner.html
 //   Specimen : https://hl7.org/fhir/specimen.html
 //
-def OBR_ORC_DiagnosticReport(required OBR, ORC, Patient) {
+def OBR_ORC_DiagnosticReport(required OBR, ORC, Patient, Observation) {
     identifier[] : EI_Identifier(OBR.2, "PLAC", "http://terminology.hl7.org/CodeSystem/v2-0203");
     identifier[] : EI_Identifier(OBR.3, "FILL", "http://terminology.hl7.org/CodeSystem/v2-0203");
     identifier[] : EI_Identifier(ORC.2, "PLAC", "http://terminology.hl7.org/CodeSystem/v2-0203");
@@ -328,6 +328,7 @@ def OBR_ORC_DiagnosticReport(required OBR, ORC, Patient) {
     }
   }
   issued : Convert_Instant(OBR.22);
+  category[0].coding[0].code: OBR.20; // Consider mapping here: https://hl7.org/fhir/r4/valueset-diagnostic-service-sections.html, http://terminology.hl7.org/CodeSystem/v2-0074
 //  category[0].coding[0].code : OBR.24;      Need Terminology Mapping: No mappings found in community sheet
   if (OBR.25) {
     status : Convert_TerminologyCode(OBR.25, "HL70123", "Report_Status");
@@ -337,6 +338,7 @@ def OBR_ORC_DiagnosticReport(required OBR, ORC, Patient) {
   performer[] : Build_Reference(Output_Resource(CNN_Practitioner(OBR.34.1)));
   performer[] : Build_Reference(Output_Resource(CNN_Practitioner(OBR.35.1)));
   specimen[] : Build_Reference(Output_Resource(OBR_Specimen(OBR, Patient)));
+  result[]: Build_Reference(Observation);
   subject : Build_Reference(Patient);
   id : $UUID();
   resourceType : "DiagnosticReport";
@@ -361,7 +363,7 @@ def PARSE_ORDER_OBSERVATION (required ORDER_OBSERVATION, Patient) {
   var Observation : OBX_Observation(ORDER_OBSERVATION.OBSERVATION[*].OBX[], Patient);
   out Resources : Observation;
 
-  var DiagnosticReport : OBR_ORC_DiagnosticReport(ORDER_OBSERVATION.OBR, ORDER_OBSERVATION.COMMON_ORDER.ORC, Patient)
+  var DiagnosticReport : OBR_ORC_DiagnosticReport(ORDER_OBSERVATION.OBR, ORDER_OBSERVATION.COMMON_ORDER.ORC, Patient, Observation);
   out Resources : DiagnosticReport;
 }
 
