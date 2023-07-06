@@ -338,7 +338,7 @@ def OBR_ORC_DiagnosticReport(required OBR, ORC, Patient, Observation) {
   performer[] : Build_Reference(Output_Resource(CNN_Practitioner(OBR.34.1)));
   performer[] : Build_Reference(Output_Resource(CNN_Practitioner(OBR.35.1)));
   specimen[] : Build_Reference(Output_Resource(OBR_Specimen(OBR, Patient)));
-  result[]: Build_Reference(Observation[*]);
+  result[]: Build_Reference(Observation[]);
   subject : Build_Reference(Patient);
   id : $UUID();
   resourceType : "DiagnosticReport";
