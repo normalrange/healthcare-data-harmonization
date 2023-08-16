@@ -995,7 +995,6 @@ def Build_ObservationValue(OBX5, OBX2, OBX6) {
   if (OBX2 = "NM") {
     if (IsNumber(OBX5.1.1)) {
       valueQuantity.value : $ParseFloat(OBX5.1.1);
-      valueString : OBX5.1.1
     } else {
       valueString : OBX5.1.1
     }

@@ -275,7 +275,10 @@ def OBX_Observation (required OBX, Patient) {
     $this : Build_ObservationValue(OBX.5[0], OBX.2, OBX.6);
   }
   referenceRange[0].text : OBX.7;
-  // interpretation: Convert_TerminologyCode(OBX.8, "HL70078", "Observation_Interpretation");
+  // interpretation[0].coding[0].code: Convert_TerminologyCode(OBX.8, "HL70078", "Observation_Interpretation");
+  // interpretation[0].coding[0].system: "http://hl7.org/fhir/ValueSet/observation-interpretation";
+  note[0].authorString: "Dynacare Original Text";
+  note[0].text: OBX.5[0].1.1;
   if (OBX.11) {
     status : Convert_TerminologyCode(OBX.11, "HL70085", "Observation_Status");
   } else {
