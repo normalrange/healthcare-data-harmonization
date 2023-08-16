@@ -55,6 +55,9 @@ harmonization_config: {
     local_path: "$MAPPING_ENGINE_HOME/mapping_configs/hl7v2_fhir_r4/code_harmonization/Observation_Status.harmonization.json"
   }
   code_lookup: {
+    local_path: "$MAPPING_ENGINE_HOME/mapping_configs/hl7v2_fhir_r4/code_harmonization/Observation_Interpretation.harmonization.json"
+  }
+  code_lookup: {
     local_path: "$MAPPING_ENGINE_HOME/mapping_configs/hl7v2_fhir_r4/code_harmonization/Relationship.harmonize.json"
   }
   code_lookup: {
