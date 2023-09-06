@@ -277,7 +277,7 @@ def OBX_Observation (required OBX, Patient) {
   referenceRange[0].text : OBX.7;
   interpretation[0].coding[0].code: Convert_TerminologyCode(OBX.8[0].1, "HL70078", "Observation_Interpretation");
   interpretation[0].coding[0].system: "http://hl7.org/fhir/ValueSet/observation-interpretation";
-  if (OBX.5[0].1.1) {
+  if ($ListLen(OBX.5) > 1 and OBX.5[0].1.1) {
     note[0].authorString: "Dynacare Raw Value";
     note[0].text: OBX.5[0].1.1;
   }
