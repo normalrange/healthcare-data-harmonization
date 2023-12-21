@@ -277,13 +277,14 @@ def OBX_Observation (required OBX, Patient) {
   referenceRange[0].text : OBX.7;
   interpretation[0].coding[0].code: Convert_TerminologyCode(OBX.8[0].1, "HL70078", "Observation_Interpretation");
   interpretation[0].coding[0].system: "http://hl7.org/fhir/ValueSet/observation-interpretation";
-  if ($ListLen(OBX.5) > 1 and OBX.5[0].1.1) {
+  if (OBX.5[0].1.1) {
+    // Consider combining these into one note with unique authorString and json payload in text, then use JSON_EXTRACT in BigQuery
     note[0].authorString: "Dynacare Raw Value";
     note[0].text: OBX.5[0].1.1;
-  }
-  if (OBX.6.1) {
-    note[1].authorString: "Dynacare Raw Units";
-    note[1].text: OBX.6.1;
+    if (OBX.6.1) {
+      note[1].authorString: "Dynacare Raw Units";
+      note[1].text: OBX.6.1;
+    }
   }
   if (OBX.11) {
     status : Convert_TerminologyCode(OBX.11, "HL70085", "Observation_Status");
